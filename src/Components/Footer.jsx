@@ -6,7 +6,7 @@ import { FaFacebook } from "react-icons/fa";
 import { FaWhatsapp } from "react-icons/fa";
 function Footer() {
   return (
-    <div style={{ backgroundColor: 'black', height: "300px" }} className='container-fluid text-light p-5'>
+    <div style={{ backgroundColor: 'rgba(108, 67, 67, 0.8)', height: "300px" }} className='container-fluid text-light p-5'>
       <div className='row'>
         <div className="col-lg-4">
           <h4 className='mb-3'>AI rBUILDER</h4>
