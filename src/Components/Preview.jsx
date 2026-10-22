@@ -1,25 +1,29 @@
 import { Divider, Button } from '@mui/material'
 import React from 'react'
 
-function Preview() {
+function Preview({ resumeDetails }) {
   return (
     <div>
-      <h2>Fullname</h2>
-      <p className='fs-5 lh-1'>Phone</p>
-      <p className='fs-5 lh-1'>Email</p>
-      <p className='fs-5 lh-1'>Linkedin</p>
-      <p className='fs-5 lh-1'>Github</p>
-      <p className='fs-5 lh-1'>Location</p>
+      <h2>{resumeDetails?.fullname}</h2>
+      <p className='fs-5 lh-1'>Phone:{resumeDetails?.phone}</p>
+      <p className='fs-5 lh-1'>Email:{resumeDetails?.email}</p>
+      <p className='fs-5 lh-1'>Linkedin:{resumeDetails?.linkedin}</p>
+      <p className='fs-5 lh-1'>Github:{resumeDetails?.github}</p>
+      <p className='fs-5 lh-1'>Location:{resumeDetails?.location}</p>
       <Divider className='bg-dark mb-3' />
       <h2>Proffessional Summary</h2>
-      <p>Summary</p>
+      <p>{resumeDetails?.summary}</p>
       <Divider className='bg-dark mb-3' />
       <h2>Techical Skills</h2>
-      <span>  <Button variant='text' className='bg-dark text-light rounded'>Skill</Button></span>
+      {/* duplicate according to skill number */}
+      {
+        resumeDetails?.skills?.map (skill=>    
+            <span>  <Button key={skill} variant='text' className='bg-dark text-light rounded my-3'>{skill}</Button></span>)
+      }
       <Divider className='bg-dark mt-3' />
-      <p>Bachelor's Degree in:</p>
-      <p>University/College Name</p>
-      <p>Year Of Graduation</p>
+      <p>Bachelor's Degree in:{resumeDetails?.degree}</p>
+      <p>University/College Name:{resumeDetails?.college}</p>
+      <p>Year Of Graduation:{resumeDetails?.year}</p>
 
 
     </div>
