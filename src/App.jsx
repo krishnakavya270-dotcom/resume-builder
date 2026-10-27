@@ -10,6 +10,7 @@ import Download from './Pages/Download'
 import Pnf from './Pages/Pnf'
 import Header from './Components/Header'
 import Footer from './Components/Footer'
+ import { ToastContainer } from 'react-toastify';
 
 function App() {
   //pages:homepage,resume,userinfo,viewresume,all saved resume,dowmload resume
@@ -26,6 +27,7 @@ function App() {
         <Route path='/*' element={<Pnf />} />
       </Routes>
        <Footer/>
+       <ToastContainer position="top-right" theme="light" autoClose={3000}/>
     </>
   )
 }

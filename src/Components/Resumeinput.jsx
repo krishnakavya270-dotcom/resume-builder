@@ -14,17 +14,14 @@ import jobrole from '../assets/jobRole.json'
 import jobskills from '../assets/jobSkills.json'
 import summaryies from '../assets/summaries.json'
 import { useState } from 'react';
-
+import { toast } from 'react-toastify';
+import { saveResumeApi } from '../service/apiService';
+import { useNavigate } from 'react-router-dom';
 
 const steps = ['Basic Informations', 'Contact Details', 'Educational Details', 'Review & Submit'];
-
-
-
-
-function Resumeinput({resumeDetails, setResumeDetails}) {
- 
-  console.log(resumeDetails);
-
+function Resumeinput({ resumeDetails, setResumeDetails }) {
+  const navigate= useNavigate()
+ // console.log(resumeDetails);
   const [activeStep, setActiveStep] = React.useState(0);
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -43,7 +40,6 @@ function Resumeinput({resumeDetails, setResumeDetails}) {
             <FormControl variant="standard"  >
               <InputLabel id="demo-simple-select-label">Choose Job Title</InputLabel>
               <Select defaultValue={" "} onChange={e => setResumeDetails({ ...resumeDetails, job: e.target.value })} labelId="demo-simple-select-label" id="demo-simple-select" label="Job" >
-
                 {
                   jobrole.jobRoles.map((job) => (
                     <MenuItem key={job} value={job}>
@@ -90,10 +86,28 @@ function Resumeinput({resumeDetails, setResumeDetails}) {
         break;
     }
   }
-  const generateskillsummary =() =>{
-    setResumeDetails({...resumeDetails,skills:jobskills[resumeDetails.job],summary:summaryies[resumeDetails.job]})
+  const generateskillsummary = () => {
+    setResumeDetails({ ...resumeDetails, skills: jobskills[resumeDetails.job], summary: summaryies[resumeDetails.job] })
     handleNext()
   }
+
+const handleSaveResume = async ()=>{
+  //make api call to save resume whenever the finish button clicks
+  const {fullname, location, job, phone, email, linkedin, github, degree, college, year, skills, summary}=resumeDetails
+  if(fullname && location && job && phone && email && linkedin && github && degree && college && year && skills.length>0 && summary){
+   const response=await  saveResumeApi(resumeDetails)
+   console.log(response);
+   if(response.status===201){
+    toast.success("Resume Added Successfully")
+    const resumId=response.data.id
+    navigate(`/resume/${resumId}`)
+   }
+   
+  }else{
+    toast.warning("please fill out compltely")
+  }
+}
+
   return (
     <Box sx={{ width: '100%' }}>
       <Stepper activeStep={activeStep}>
@@ -114,7 +128,7 @@ function Resumeinput({resumeDetails, setResumeDetails}) {
           </Typography>
           <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
             <Box sx={{ flex: '1 1 auto' }} />
-            <Button >
+            <Button onClick={handleSaveResume}>
               FINISH
             </Button>
           </Box>

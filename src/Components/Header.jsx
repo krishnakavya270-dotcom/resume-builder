@@ -7,6 +7,9 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import { Tooltip } from '@mui/material';
 import { Link } from 'react-router-dom';
+import { IoDocumentText } from "react-icons/io5";
+import { IoMdRefresh } from "react-icons/io";
+
 
 
 function Header() {
@@ -27,6 +30,8 @@ function Header() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
          <Link  to ="/" className='text-light text-decoration-none' > AI rBUILDER</Link>
           </Typography>
+          <Link to={'/all-resumes'} className='text-light text-decoration-none'>  <IoDocumentText size={20} />  All Resumes</Link>
+          <Link to={'/downloads'} className='text-light text-decoration-none'><IoMdRefresh size={20}/>  Download History</Link>
          <Tooltip title={title}> <Button color="inherit">ABOUT US</Button></Tooltip>
         </Toolbar>
       </AppBar>
