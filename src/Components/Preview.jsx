@@ -3,6 +3,9 @@ import React from 'react'
 
 function Preview({ resumeDetails }) {
   return (
+
+
+    
     <div>
       <h2>{resumeDetails?.fullname}</h2>
       <p className='fs-5 lh-1'>Phone:{resumeDetails?.phone}</p>

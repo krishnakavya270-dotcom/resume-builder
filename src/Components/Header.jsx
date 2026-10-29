@@ -16,7 +16,7 @@ function Header() {
   const title="An AI rBuilder suggest job-specific keywords, professional summaries, and skill recommendations to make the resume more effective and ATS (Applicant Tracking System) friendly. The main goal of the AI Powered Resume Builder is to simplify the resume creation process and help job seekers build professional, well-structured resumes in a few minutes. Users can select templates, edit content, preview their resume, and download it in formats such as PDF."
   return (
    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" sx={{backgroundColor:'rgba(108, 67, 67, 0.8)'}}>
+      <AppBar position="static" sx={{   backgroundColor: "#17365D", color: "#FFFFFF"}}>
         <Toolbar>
           <IconButton
             size="large"
