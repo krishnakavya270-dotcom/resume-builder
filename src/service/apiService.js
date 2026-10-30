@@ -31,3 +31,8 @@ export const downloadResumeApi = async ( resumeDetails) => {
   return await axiosService( "POST", `/downloads`, resumeDetails  );
 };
 
+// get download resumes API:called by download component when page loads in browser
+export const getAllDownloadResumeApi = async ( ) => {
+  return await axiosService( "GET", `/downloads`, {} );
+};
+

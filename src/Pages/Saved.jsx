@@ -3,12 +3,20 @@ import { IoTrashOutline } from "react-icons/io5";
 import { Link } from 'react-router-dom';
 import { FaSearch } from "react-icons/fa";
 import { deleteAllResumeApi, getAllResumeApi } from '../service/apiService';
+import { FaBackward, FaForward } from 'react-icons/fa6';
 
 function Saved() {
   const [allResumes, setAllResumes] = useState([])
   const [searchKey, setSearchKey] = useState("")
   const [dummyAllResumes,setDummyAllResumes] = useState([])
-  console.log(searchKey);
+  //console.log(searchKey);
+
+  const [currentPage,setCurrentpage]=useState(1)
+  const rowPerPage=4
+  const lastIndexofCurrentpage = currentPage * rowPerPage
+  const firstIndexofCurrentpage = lastIndexofCurrentpage - rowPerPage
+  const currentResumes=allResumes.slice(firstIndexofCurrentpage,lastIndexofCurrentpage)
+  const totalPages = Math.ceil(allResumes.length/rowPerPage)
 
   useEffect(() => {
     searchKey == "" ? getAllResumes() : searchCandidate()
@@ -57,8 +65,8 @@ function Saved() {
         </thead>
 
         <tbody>
-          {allResumes.length > 0 ? (
-            allResumes.map((resume, index) => (
+          {currentResumes.length > 0 ? (
+            currentResumes.map((resume, index) => (
               <tr key={resume.id}>
                 <td>{index + 1}</td>
                 <td>
@@ -80,6 +88,16 @@ function Saved() {
           )}
         </tbody>
       </table>
+
+      <div className='d-flex justify-content-center align-items-center gap-3'>
+        <button className='btn' onClick={()=>setCurrentpage(currentPage-1)} disabled={currentPage==1}>
+         <FaBackward/>
+        </button>
+        {currentPage} of {totalPages}
+         <button className='btn' onClick={()=>setCurrentpage(currentPage+1)} disabled={currentPage==totalPages || totalPages==0}>
+            <FaForward/>
+          </button>
+      </div>
     </div>
   );
 }
